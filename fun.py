@@ -16,6 +16,15 @@ client.set_interpolation(False)
 cols = [(231, 76, 60),(230, 126, 34),(241, 196, 15),(39, 174, 96),(52, 152, 219),(142, 68, 173)]
 def fill(inString,inColor):
    pass 
+
+def nextColor(r,g,b):
+    if r > 0 and b == 0:
+        return r-1,g+1,b
+    if g > 0 and r == 0:
+        return r,g-1,b+1
+    if b > 0 and g == 0:
+        return r+1,g,b-1
+
 def rainbowStripes():
     for i in range(18):
         direction = i//6 + 1
@@ -71,7 +80,7 @@ def rainbowTriangleWipe():
         time.sleep(0.3)
 
 def rando():
-    hexSet = range(54)
+    hexSet = list(range(54))
     pixels = [ (0,0,0) ] * numLEDs
     for ledNum in hexSet:
         colNum = random.randint(0,len(german)-1)
@@ -86,7 +95,7 @@ def randomloop(delay=0.5):
 
 def sprinkle(delay=0.05):
     pixels = rando()
-    led_list = range(54)
+    led_list = list(range(54))
     random.shuffle(led_list)
     while True:
         for ledNum in led_list:
@@ -107,6 +116,27 @@ def pumpkin():
     for j in patt['pumpkin']['top']:
         pixels[j] = (0,255,0)
     client.put_pixels(pixels)
+
+def tree():
+    pixels = [(1, 50, 67)] * numLEDs
+    for j in patt['tree']['leaves']:
+        pixels[j] = (0,255,0)
+    for j in patt['tree']['trunk']:
+        pixels[j] = (86, 47, 14)
+    for j in patt['tree']['star']:
+        pixels[j] = (245, 230, 83)
+
+def david():
+    r,g,b = (255,0,0)
+    while True:
+        pixels = [(100,100,100)] * numLEDs
+        for j in patt['david']:
+            pixels[j] = (r,g,b)
+        r,g,b = nextColor(r,g,b)
+        client.put_pixels(pixels)
+        time.sleep(.01)
+
+
 
 def fun(routine):
     try:
