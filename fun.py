@@ -16,10 +16,10 @@ class Fun:
         self.client = opc.Client('localhost:7890')
         self.client.set_interpolation(False)
 
-
     def fill(inString,inColor):
        pass 
 
+    @staticmethod
     def nextColor(r,g,b):
         if r > 0 and b == 0:
             return r-1,g+1,b
@@ -28,17 +28,17 @@ class Fun:
         if b > 0 and g == 0:
             return r+1,g,b-1
 
-    def rainbowStripes():
+    def rainbowStripes(self):
         for i in range(18):
             direction = i//6 + 1
             stripe = i%6 + 1
             pixels = [ (90,90,90) ] * numLEDs
             for j in patt['stripe'][direction][stripe]:
                 pixels[j] = cols[stripe-1]
-            client.put_pixels(pixels)
+            self.client.put_pixels(pixels)
             time.sleep(0.1)
 
-    def rainbowRings():
+    def rainbowRings(self):
         for i in range(6):
             pixels = [ (0,0,0) ] * numLEDs
             for j in patt['ring'][1]:
@@ -47,17 +47,18 @@ class Fun:
                 pixels[j] =cols[(i+5)%6]
             for j in patt['ring'][3]:
                 pixels[j] =cols[(i+4)%6]
-            client.put_pixels(pixels)
+            self.client.put_pixels(pixels)
             time.sleep(0.3)
 
-    def rainbowTriangles():
+    def rainbowTriangles(self):
         pixels = [ (0,0,0) ] * numLEDs
         for i in range(6):
             for j in patt['triangle'][i+1]:
                 pixels[j] =cols[i]
-        client.put_pixels(pixels)
+        self.client.put_pixels(pixels)
         time.sleep(5)
-    def rainbowTriangleWipe():
+
+    def rainbowTriangleWipe(self):
         pixels = [ (0,0,0) ] * numLEDs
         triMap = [1,2,3,6,5,4]
         # finds each larger triangle
@@ -65,7 +66,7 @@ class Fun:
             # fills in the triangle
             for j in patt['triangle'][triMap[i]]:
                 pixels[j] =cols[i]
-        client.put_pixels(pixels)
+        self.client.put_pixels(pixels)
         time.sleep(1)
         for loop in range(30):
             # finds each larger triangle
@@ -79,24 +80,24 @@ class Fun:
                 pixels[j] =cols[dominantColor]
             for j in patt['triangle'][triMap[(overtaken+1)%6]]:
                 pixels[j] =cols[dominantColor]
-            client.put_pixels(pixels)
+            self.client.put_pixels(pixels)
             time.sleep(0.3)
 
-    def rando():
+    def rando(self):
         hexSet = list(range(54))
         pixels = [ (0,0,0) ] * numLEDs
         for ledNum in hexSet:
             colNum = random.randint(0,len(german)-1)
             pixels[ledNum] = german[colNum]
-        client.put_pixels(pixels)
+        self.client.put_pixels(pixels)
         return pixels
 
     def randomloop(delay=0.5):
         while True:
-            rando()
+            self.rando()
             time.sleep(delay)
 
-    def sprinkle(delay=0.05):
+    def sprinkle(self, delay=0.05):
         pixels = rando()
         led_list = list(range(54))
         random.shuffle(led_list)
@@ -106,7 +107,7 @@ class Fun:
                 while german[colNum] == pixels[ledNum]:
                     colNum = random.randint(0,len(german)-1)
                 pixels[ledNum] = german[colNum]
-                client.put_pixels(pixels)
+                self.client.put_pixels(pixels)
                 time.sleep(delay)
                  
 
@@ -128,18 +129,21 @@ class Fun:
             pixels[j] = (86, 47, 14)
         for j in patt['tree']['star']:
             pixels[j] = (245, 230, 83)
+        self.client.put_pixels(pixels)
 
-    def david():
+    def off(self):
+        pixels = [(0, 0, 0)] * numLEDs
+        self.client.put_pixels(pixels)
+
+    def david(self):
         r,g,b = (255,0,0)
         while True:
             pixels = [(100,100,100)] * numLEDs
             for j in patt['david']:
                 pixels[j] = (r,g,b)
             r,g,b = nextColor(r,g,b)
-            client.put_pixels(pixels)
+            self.client.put_pixels(pixels)
             time.sleep(.01)
-
-
 
     def fun(routine):
         try:
@@ -149,4 +153,5 @@ class Fun:
 
 if __name__ == "__main__":
     c = Fun()
-    c.pumpkin()
+    attr = getattr(c, sys.argv[1])
+    attr()
