@@ -16,19 +16,7 @@ class Fun:
         self.client = opc.Client('localhost:7890')
         self.client.set_interpolation(False)
 
-    def fill(inString,inColor):
-       pass 
-
-    @staticmethod
-    def nextColor(r,g,b):
-        if r > 0 and b == 0:
-            return r-1,g+1,b
-        if g > 0 and r == 0:
-            return r,g-1,b+1
-        if b > 0 and g == 0:
-            return r+1,g,b-1
-
-    def rainbowStripes(self):
+    def rainbow_stripes(self):
         for i in range(18):
             direction = i//6 + 1
             stripe = i%6 + 1
@@ -38,7 +26,7 @@ class Fun:
             self.client.put_pixels(pixels)
             time.sleep(0.1)
 
-    def rainbowRings(self):
+    def rainbow_rings(self):
         for i in range(6):
             pixels = [ (0,0,0) ] * numLEDs
             for j in patt['ring'][1]:
@@ -50,7 +38,7 @@ class Fun:
             self.client.put_pixels(pixels)
             time.sleep(0.3)
 
-    def rainbowTriangles(self):
+    def rainbow_triangles(self):
         pixels = [ (0,0,0) ] * numLEDs
         for i in range(6):
             for j in patt['triangle'][i+1]:
@@ -58,7 +46,7 @@ class Fun:
         self.client.put_pixels(pixels)
         time.sleep(5)
 
-    def rainbowTriangleWipe(self):
+    def rainbow_triangle_wipe(self):
         pixels = [ (0,0,0) ] * numLEDs
         triMap = [1,2,3,6,5,4]
         # finds each larger triangle
@@ -92,23 +80,17 @@ class Fun:
         self.client.put_pixels(pixels)
         return pixels
 
-    def randomloop(delay=0.5):
-        while True:
-            self.rando()
-            time.sleep(delay)
-
     def sprinkle(self, delay=0.05):
-        pixels = rando()
+        pixels = self.rando()
         led_list = list(range(54))
         random.shuffle(led_list)
-        while True:
-            for ledNum in led_list:
+        for ledNum in led_list:
+            colNum = random.randint(0,len(german)-1)
+            while german[colNum] == pixels[ledNum]:
                 colNum = random.randint(0,len(german)-1)
-                while german[colNum] == pixels[ledNum]:
-                    colNum = random.randint(0,len(german)-1)
-                pixels[ledNum] = german[colNum]
-                self.client.put_pixels(pixels)
-                time.sleep(delay)
+            pixels[ledNum] = german[colNum]
+            self.client.put_pixels(pixels)
+            time.sleep(delay)
                  
 
     def pumpkin(self):
@@ -136,22 +118,8 @@ class Fun:
         self.client.put_pixels(pixels)
 
     def david(self):
-        r,g,b = (255,0,0)
-        while True:
-            pixels = [(100,100,100)] * numLEDs
-            for j in patt['david']:
-                pixels[j] = (r,g,b)
-            r,g,b = nextColor(r,g,b)
-            self.client.put_pixels(pixels)
-            time.sleep(.01)
-
-    def fun(routine):
-        try:
-            globals()[routine]()
-        except (ImportError):
-            print("Trouble in paradise")
-
-if __name__ == "__main__":
-    c = Fun()
-    attr = getattr(c, sys.argv[1])
-    attr()
+        r,g,b = (0,0,255)
+        pixels = [(100,100,100)] * numLEDs
+        for j in patt['david']:
+            pixels[j] = (r,g,b)
+        self.client.put_pixels(pixels)
