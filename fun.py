@@ -193,3 +193,11 @@ class Fun:
             for p in patt['ring'][3]:
                 pixels[p] = (244,191,73)
             yield (pixels, 0.1, False)
+
+    def fade(self):
+      bright = 255
+      pixels = [(bright,bright,bright)] * numLEDs
+      while bright > 0:
+        bright -= 1
+        pixels = [(bright,bright,bright)] * numLEDs
+        self.client.put_pixels(pixels)
