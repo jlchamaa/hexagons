@@ -123,3 +123,11 @@ class Fun:
         for j in patt['david']:
             pixels[j] = (r,g,b)
         self.client.put_pixels(pixels)
+
+    def fade(self):
+      bright = 255
+      pixels = [(bright,bright,bright)] * numLEDs
+      while bright > 0:
+        bright -= 1
+        pixels = [(bright,bright,bright)] * numLEDs
+        self.client.put_pixels(pixels)
