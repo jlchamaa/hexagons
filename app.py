@@ -1,7 +1,11 @@
 from fun import Fun
+from multiprocessing import Process, Queue
 from flask import Flask, render_template, g
 app = Flask(__name__)
-f = Fun()
+q = Queue()
+f= Fun()
+p = Process(target=f._run, args=(q,))
+p.start()
 
 @app.route('/')
 def index():
@@ -17,7 +21,7 @@ def index():
                 need_cap = False
         return ''.join(str_arr)
 
-    patterns = [prettify(func) for func in dir(f) if not func.startswith('__')]
+    patterns = [prettify(func) for func in dir(f) if not func.startswith('_')]
     patterns.sort()
     patterns.remove('Off')
     patterns.remove('Client')
@@ -30,9 +34,12 @@ def pattern(name=None):
     if name:
         name = name.replace(' ','_').lower()
         app.logger.info("{} pattern called".format(name))
-        func = getattr(f, name)
-        func()
+        q.put(name)
     return "Pattern was {}".format(name)
+
+@app.route('/custom',methods=['GET'])
+def custom():
+    return render_template('custom.html')
 
 portno=None
 with open('portno','r') as myfile:
