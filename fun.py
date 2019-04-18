@@ -195,10 +195,10 @@ class Fun:
             yield (pixels, 0.1, False)
 
     def fade(self):
-        whiile True:
+        while True:
             bright = 255
             pixels = [(bright,bright,bright)] * numLEDs
             while bright > 0:
                 bright -= 1
-            pixels = [(bright,bright,bright)] * numLEDs
-            yield (pixels, 3, False)
+                pixels = [(bright,bright,bright)] * numLEDs
+                yield (pixels, .027, False)
