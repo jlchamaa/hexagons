@@ -201,4 +201,5 @@ class Fun:
             while bright > 0:
                 bright -= 1
                 pixels = [(bright,bright,bright)] * numLEDs
-                yield (pixels, .027, False)
+                yield (pixels, .027, True)
+            yield (pixels, 0.5, False)
