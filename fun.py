@@ -172,6 +172,25 @@ class Fun:
             pixels = [(0, 0, 0)] * numLEDs
             yield (pixels, 0.1, False)
 
+    def flower(self):
+        while True:
+            #variable for yellow  petals
+            petal_color = (255,233,0)
+            #set background to purple
+            pixels = [(149,44,201)] * numLEDs
+            for j in patt['flower']['pistil']:
+                #set pistil to brown
+                pixels[j] = (66,28,19)
+            for j in patt['flower']['left']:
+                pixels[j] = (petal_color)
+            for j in patt['flower']['top']:
+                pixels[j] = (petal_color)
+            for j in patt['flower']['right']:
+                pixels[j] = (petal_color)
+            for j in patt['flower']['bottom']:
+                pixels[j] = (petal_color)
+            yield (pixels, 0.1, False)
+
     def david(self):
         while True:
             r,g,b = (0,0,255)
