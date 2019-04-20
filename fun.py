@@ -69,9 +69,12 @@ class Fun:
                 blue = int(hex_code[4:6], 16)
                 pixel = (red, green, blue)
                 pixels.append(pixel)
+
+        except IndexError:
+            pass
+
+        finally:
             return (pixels , 1, False)
-        except:
-            return None
 
 
     def rainbow_stripes(self):
