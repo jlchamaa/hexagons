@@ -182,13 +182,13 @@ class Fun:
                 #set pistil to brown
                 pixels[j] = (66,28,19)
             for j in patt['flower']['left']:
-                pixels[j] = (petal_color)
+                pixels[j] = petal_color
             for j in patt['flower']['top']:
-                pixels[j] = (petal_color)
+                pixels[j] = petal_color
             for j in patt['flower']['right']:
-                pixels[j] = (petal_color)
+                pixels[j] = petal_color
             for j in patt['flower']['bottom']:
-                pixels[j] = (petal_color)
+                pixels[j] = petal_color
             yield (pixels, 0.1, False)
 
     def david(self):
