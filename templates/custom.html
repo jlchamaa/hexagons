@@ -1,23 +1,63 @@
 <!DOCTYPE html>
 <html>
-      <head>
-              <meta charset="utf-8"/>
-                  <title>Canvas tutorial</title>
-                      <script type="text/javascript">
-function draw() {
-            var canvas = document.getElementById('tutorial');
-            if (canvas.getContext) {
-                          var ctx = canvas.getContext('2d');
-                                  
-            }
-                  
-}
-    </script>
-        <style type="text/css">
-      canvas { border: 1px solid black;  }
-          </style>
-            </head>
-              <body onload="draw();">
-                      <canvas id="tutorial" width="150" height="150"></canvas>
-                        </body>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Canvas tutorial</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="static/custom.css">
+    </head>
+
+    <body>
+        <svg width="1300" height="1300">
+            <!-- First row-->
+            {% for n in range(4,11) %}
+            <polygon
+                points="{{50*n}},{{100-50*(2*(n%2)-1)}} {{50*(n+1)}},{{100+50*(2*(n%2)-1)}} {{50*(n+2)}},{{100-50*(2*(n%2)-1)}}"
+                class="pixel"
+                id="pixel{{43+n}}"/>
+            {% endfor %}
+            
+            <!-- second row-->
+            {% for n in range(3,12) %}
+            <polygon
+                points="{{50*n}},{{200+50*(2*(n%2)-1)}} {{50*(n+1)}},{{200-50*(2*(n%2)-1)}} {{50*(n+2)}},{{200+50*(2*(n%2)-1)}}"
+                class="pixel"
+                id="pixel{{49-n}}"/>
+            {% endfor %}
+
+            <!-- third row-->
+            {% for n in range(2,13) %}
+            <polygon
+                points="{{50*n}},{{300-50*(2*(n%2)-1)}} {{50*(n+1)}},{{300+50*(2*(n%2)-1)}} {{50*(n+2)}},{{300-50*(2*(n%2)-1)}}"
+                class="pixel"
+                id="pixel{{25+n}}"/>
+            {% endfor %}
+            
+            <!-- fourth row-->
+            {% for n in range(2,13) %}
+            <polygon
+                points="{{50*n}},{{400+50*(2*(n%2)-1)}} {{50*(n+1)}},{{400-50*(2*(n%2)-1)}} {{50*(n+2)}},{{400+50*(2*(n%2)-1)}}"
+                class="pixel"
+                id="pixel{{28-n}}"/>
+            {% endfor %}
+
+            <!-- fifth row-->
+            {% for n in range(3,12) %}
+            <polygon
+                points="{{50*n}},{{500-50*(2*(n%2)-1)}} {{50*(n+1)}},{{500+50*(2*(n%2)-1)}} {{50*(n+2)}},{{500-50*(2*(n%2)-1)}}"
+                class="pixel"
+                id="pixel{{4+n}}"/>
+            {% endfor %}
+            
+            <!-- sixth row-->
+            {% for n in range(4,11) %}
+            <polygon
+                points="{{50*n}},{{600+50*(2*(n%2)-1)}} {{50*(n+1)}},{{600-50*(2*(n%2)-1)}} {{50*(n+2)}},{{600+50*(2*(n%2)-1)}}"
+                class="pixel"
+                id="pixel{{10-n}}"/>
+            {% endfor %}
+
+        </svg>
+    </body>
+    <script src="static/custom.js" type="text/javascript"></script>
 </html>
