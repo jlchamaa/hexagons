@@ -215,7 +215,7 @@ class Fun:
 
     def fade(self):
         while True:
-            bright = 255
+            bright = random.randint(0,255)
             pixels = [(bright,bright,bright)] * numLEDs
             while bright > 0:
                 bright -= 1
