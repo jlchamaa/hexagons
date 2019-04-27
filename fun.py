@@ -146,7 +146,7 @@ class Fun:
     
     def snake(self):
         default_color = (0,0,0)
-        random = random.randint(0,255)
+        random_col = (random.randint(0,255))
         fade = n*5
         while True:
             for cell in range(numLEDs):
@@ -155,7 +155,7 @@ class Fun:
                 pixels[cell] = (0,0,255)
                 #other cells of snake
                 for n in range(1,numLEDs):
-                    pixels[cell-n] = (random-fade,random-fade,random-fade)
+                    pixels[cell-n] = (random_col-fade,random_col-fade,random_col-fade)
                 yield (pixels, .09, True)
 
     def pumpkin(self):
