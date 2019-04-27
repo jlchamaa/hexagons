@@ -145,13 +145,15 @@ class Fun:
                 yield (pixels,0.05, True)
     
     def snake(self):
-        default_color = (255,255,255)
+        default_color = (0,0,0)
         while True:
-            #head of snake
             for cell in range(numLEDs):
                 pixels = [default_color] * numLEDs
+                #first cell of snake
                 pixels[cell] = (0,0,255)
-                pixels[cell-1] = (0,255,0)
+                #other cells of snake
+                for n in range(1,numLEDs):
+                    pixels[cell-n] = (0,255-n*5,0)
                 yield (pixels, .09, True)
 
     def pumpkin(self):
