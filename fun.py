@@ -143,7 +143,14 @@ class Fun:
                     colNum = random.randint(0,len(german)-1)
                 pixels[ledNum] = german[colNum]
                 yield (pixels,0.05, True)
-                 
+    
+    def snake(self):
+        default_color = (255,255,255)
+        while True:
+            for cell in range(numLEDS):
+                pixels = [default_color] * numLEDs
+                pixels[cell] = (0,0,255)
+                yield (pixels, .09, True)
 
     def pumpkin(self):
         while True:
