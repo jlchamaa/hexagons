@@ -151,10 +151,10 @@ class Fun:
                 pixels = [default_color] * numLEDs
                 #first cell of snake
                 pixels[cell] = (0,0,255)
+                #initialize random color outside of second for loop
+                rand_color = allCols[random.randint(0,len(allCols)-1)]
                 #other cells of snake
                 for n in range(1,numLEDs):
-                    #fade = n*5
-                    rand_color = allCols[random.randint(0,len(allCols)-1)]
                     pixels[cell-n] = rand_color
                 yield (pixels, .09, True)
 
