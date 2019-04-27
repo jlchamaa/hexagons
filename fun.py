@@ -147,9 +147,11 @@ class Fun:
     def snake(self):
         default_color = (255,255,255)
         while True:
-            for cell in range(numLEDS):
+            #head of snake
+            for cell in range(numLEDs):
                 pixels = [default_color] * numLEDs
                 pixels[cell] = (0,0,255)
+                pixels[cell-1] = (0,255,0)
                 yield (pixels, .09, True)
 
     def pumpkin(self):
