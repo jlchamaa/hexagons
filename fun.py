@@ -153,9 +153,8 @@ class Fun:
                 pixels[cell] = (0,0,255)
                 #other cells of snake
                 for n in range(1,numLEDs):
-                    allCols_len = len(allCols)
                     #fade = n*5
-                    rand_color = allCols[random.randint(0,allCols_len)]
+                    rand_color = allCols[random.randint(0,len(allCols)-1)]
                     pixels[cell-n] = rand_color
                 yield (pixels, .09, True)
 
