@@ -146,16 +146,11 @@ class Fun:
     
     def snake(self):
         default_color = (0,0,0)
+        rand_snake = [german[random.randint(0,len(german)-1)] for _ in range(numLEDs)]
         while True:
             for cell in range(numLEDs):
                 pixels = [default_color] * numLEDs
-                #first cell of snake
-                pixels[cell] = (0,0,255)
-                #initialize random color outside of second for loop
-                rand_color = allCols[random.randint(0,len(allCols)-1)]
-                #other cells of snake
-                for n in range(1,numLEDs):
-                    pixels[cell-n] = rand_color
+                rand_snake[cell]
                 yield (pixels, .09, True)
 
     def pumpkin(self):
