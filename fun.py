@@ -146,11 +146,12 @@ class Fun:
     
     def snake(self):
         default_color = (0,0,0)
-        rand_snake = [col for col in german]
+        # [:] means all of the elements
+        rand_snake = german[:]
         while True:
             for cell in range(numLEDs):
                 pixels = [default_color] * numLEDs
-                rand_snake[cell]
+                rand_snake[cell
                 yield (pixels, .09, True)
 
     def pumpkin(self):
