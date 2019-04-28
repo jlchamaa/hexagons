@@ -144,15 +144,28 @@ class Fun:
                 pixels[ledNum] = german[colNum]
                 yield (pixels,0.05, True)
     
-    def snake(self):
+    def green_snake(self):
+        default_color = (0,0,0)
+        while True:
+            for cell in range(numLEDs):
+                pixels = [default_color] * numLEDs
+                #first cell of snake
+                pixels[cell] = (0,255,0)
+                #other cells of snake
+                for n in range(1,numLEDs):
+                    pixels[cell-n] = (0,255-n*5,0)
+                yield (pixels, .09, True)
+
+    def rainbow_snake(self):
         default_color = (0,0,0)
         # [:] means all of the elements
         rand_snake = german[:]
         while True:
             for cell in range(numLEDs):
                 pixels = [default_color] * numLEDs
+                fade = cell*3
                 for position, color in enumerate(rand_snake):
-                    pixels[cell-position]=color
+                    pixels[cell-position]=(color[0]-fade,color[1]-fade,color[2]-fade)
                 yield (pixels, .09, True)
 
     def pumpkin(self):
