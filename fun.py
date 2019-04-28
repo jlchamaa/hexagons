@@ -151,7 +151,8 @@ class Fun:
         while True:
             for cell in range(numLEDs):
                 pixels = [default_color] * numLEDs
-                rand_snake[cell
+                for position, color in enumerate(rand_snake):
+                    pixels[cell-position]=color
                 yield (pixels, .09, True)
 
     def pumpkin(self):
