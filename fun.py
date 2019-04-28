@@ -146,7 +146,7 @@ class Fun:
     
     def snake(self):
         default_color = (0,0,0)
-        rand_snake = [german[random.randint(0,len(german)-1)] for _ in range(numLEDs)]
+        rand_snake = [col for col in german]
         while True:
             for cell in range(numLEDs):
                 pixels = [default_color] * numLEDs
