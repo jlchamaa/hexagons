@@ -1,6 +1,6 @@
 from fun import Fun
 from multiprocessing import Process, Queue
-from flask import Flask, render_template, g
+from flask import Flask, render_template, g, request
 app = Flask(__name__)
 q = Queue()
 f= Fun()
@@ -40,6 +40,12 @@ def pattern(name=None):
 @app.route('/custom',methods=['GET'])
 def custom():
     return render_template('custom.html')
+
+@app.route('/apply', methods=['POST'])
+def apply():
+    f.client.put_pixels(request.json)
+    return "Success", 200
+
 
 portno=None
 with open('portno','r') as myfile:

@@ -54,6 +54,14 @@ class Fun:
         except AttributeError:
             return None
 
+    def custom_json(self, payload):
+        pixels = []
+        for led in payload:
+            color = (led[0], led[1], led[2])
+            pixels.append(color)
+        yield
+
+
 
     def _custom(self, new_data):
         """takes a string of exactly numLeds long of the form
@@ -72,6 +80,14 @@ class Fun:
             return (pixels , 1, False)
         except:
             return None
+
+    def diamond(self):
+        pixels = [ (0,0,0) ] * numLEDs
+        while True:
+            pixels[patt['diamond'][1]] = cols[4]
+            for p in patt['diamond'][2]:
+                pixels[p] = cols[2]
+            yield (pixels, 0.1, False)
 
 
     def rainbow_stripes(self):
@@ -245,3 +261,25 @@ class Fun:
                 pixels = [(bright,bright,bright)] * numLEDs
                 yield (pixels, .027, True)
             yield (pixels, 0.5, False)
+
+    def america(self):
+        pixels = [(0,0,0)] * numLEDs
+        while True:
+            for j in patt['america']['blue']:
+                pixels[j] = ( 0, 40, 104  )
+            for j in patt['america']['red']:
+                pixels[j] = (191, 10, 48)
+            for j in patt['america']['white']:
+                pixels[j] = (255,255,255)
+            yield (pixels, 0.1, False)
+
+    def canada(self):
+        pixels = [(255,255,255)] * numLEDs
+        while True:
+            for j in patt['canada']['leaf']:
+                pixels[j] = (191, 10, 48)
+            for j in patt['canada']['left']:
+                pixels[j] = (191, 10, 48)
+            for j in patt['canada']['right']:
+                pixels[j] = (191, 10, 48)
+            yield (pixels, 0.1, False)
