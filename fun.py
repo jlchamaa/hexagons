@@ -283,3 +283,12 @@ class Fun:
             for j in patt['canada']['right']:
                 pixels[j] = (191, 10, 48)
             yield (pixels, 0.1, False)
+
+    def cambodia(self):
+        pixels = [(210,35,42)] * numLEDs
+        while True:
+            for j in patt['cambodia']['blues']:
+                pixels[j] = (191, 10, 48)
+            for j in patt['cambodia']['angkor_wat']:
+                pixels[j] = (37, 64, 143)
+            yield (pixels, 0.1, False)
