@@ -285,10 +285,10 @@ class Fun:
             yield (pixels, 0.1, False)
 
     def cambodia(self):
-        pixels = [(210,35,42)] * numLEDs
+        pixels = [(224, 0, 37)] * numLEDs
         while True:
             for j in patt['cambodia']['blues']:
-                pixels[j] = (191, 10, 48)
+                pixels[j] = (3, 46, 161)
             for j in patt['cambodia']['angkor_wat']:
-                pixels[j] = (37, 64, 143)
+                pixels[j] = (255, 255, 255)
             yield (pixels, 0.1, False)
