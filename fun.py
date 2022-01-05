@@ -6,6 +6,7 @@ from pudb.remote import set_trace
 from patterns import patt
 from patterns import allCols
 from patterns import german
+from datetime import datetime
 import random
 import pdb
 import sys
@@ -80,6 +81,35 @@ class Fun:
             return (pixels , 1, False)
         except:
             return None
+
+    def clock(self):
+        while True:
+            pixels = [ (0,0,0) ] * numLEDs
+            now = datetime.now()
+            # hour
+            h = now.hour % 12
+            for pixel in patt['ring'][1]:
+                pixels[pixel] = (84, 29, 33)
+            for pixel in patt['clock']['hour'][h]:
+                pixels[pixel] = german[0]
+
+            # minute
+            m = now.minute
+            for pixel in patt['ring'][2]:
+                pixels[pixel] = (84, 70, 16)
+            m_index = int(len(patt['clock']['minute'])*m/60.0)
+            m_pixel = patt['clock']['minute'][m_index]
+            pixels[m_pixel] = german[2]
+
+            # second
+            s = now.second
+            for pixel in patt['ring'][3]:
+                pixels[pixel] = (16, 74, 68)
+            s_index = int(len(patt['clock']['second'])*s/60.0)
+            s_pixel = patt['clock']['second'][s_index]
+            pixels[s_pixel] = german[4]
+
+            yield (pixels, 1.0, True)
 
     def diamond(self):
         pixels = [ (0,0,0) ] * numLEDs
